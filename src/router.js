@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { Route, Switch, routerRedux, withRouter, Redirect } from 'dva/router';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import IndexPage from './routes/IndexPage';
+import AppSwitch from './routes/AppSwitch';
+import adminLoin from './routes/adminLoin';
+import application from './routes/application';
 const { ConnectedRouter } = routerRedux;
 
 const routeComponent = [
-  { key: 'root', path: '/index', exact: true, component: IndexPage },
+  { key: 'root', path: '/login', exact: true, component: adminLoin },
+  { key: 'application', path: '/application', exact: true, component: application },
 ];
 const redirectComponent = [ //轉址
-  { key: 'root', exact: true, to: '/index', From: '/' },
+  { key: 'root', exact: true, to: '/login', From: '/' },
 ];
 
 class Root extends Component {
@@ -55,14 +58,14 @@ const router = props => {
     <ConnectedRouter {...props}>
       <RouterRoot {...props}>
         <Switch>
-          {/* <AppSwitch> */}
+          <AppSwitch>
           {
             routeComponent.map(value => renderRoutes(value))
           }
           {
             redirectComponent.map(value => renderRedirects(value))
           }
-          {/* </AppSwitch> */}
+          </AppSwitch>
         </Switch>
       </RouterRoot>
     </ConnectedRouter>

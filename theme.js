@@ -1,4 +1,4 @@
 module.exports = {
-  "@layout-header-background": "#388e3c",
-  "@primary-color": "#388e3c"
+  "@layout-header-background": "#7dc4c8",
+  "@primary-color": "#7dc4c8"
 };
