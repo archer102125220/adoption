@@ -71,6 +71,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
           <div style={{ marginBottom: 16 }}>
             <Input addonBefore='電話號碼' value={phone} onChange={(e) => this.setState({ phone: e.target.value })} />
           </div>
+          <Button type='primary' style={{ marginBottom: 16, width: '100%' }}>送出申請</Button>
         </div>
       );
     }
