@@ -63,9 +63,9 @@ const LoginForm = Form.create()(
       this.props.form.validateFields((err, values) => {
         if (!err) {
           const { Account, password } = values;
-          // this.props.handlePOSTAdminLoin({ name: Account, password }, () => this.props.history.push('/application'));
-          // this.props.handleGETAdminLoin({ name: Account, password }, () => this.props.history.push('/application'));
-          this.props.history.push('/application')
+          // this.props.handlePOSTAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
+          // this.props.handleGETAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
+          this.props.history.push('/home');
         }
       });
     };

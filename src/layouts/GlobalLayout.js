@@ -41,14 +41,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       const { children, systemName, copyright } = this.props;
       const menu = (
         <Menu>
-          <Menu.Item key='1'><Link to='/logout'>登出</Link></Menu.Item>
+          <Menu.Item key='1'><Link to='/'>登出</Link></Menu.Item>
         </Menu>
       );
       const { isMobile } = this.state;
       return (
         <Layout style={{ minHeight: '100vh' }}>
           <Layout.Header>
-            <a className='logo'>{systemName}</a>
+            <Link className='logo' to='/home'>{systemName}</Link>
             <div style={isMobile === false ? { float: 'right' } : {}}>
               {
                 isMobile === false && (

@@ -5,11 +5,13 @@ import _ from 'lodash';
 import AppSwitch from './routes/AppSwitch';
 import adminLoin from './routes/adminLoin';
 import application from './routes/application';
+import home from './routes/home';
 const { ConnectedRouter } = routerRedux;
 
 const routeComponent = [
   { key: 'root', path: '/login', exact: true, component: adminLoin },
   { key: 'application', path: '/application', exact: true, component: application },
+  { key: 'home', path: '/home', exact: true, component: home },
 ];
 const redirectComponent = [ //轉址
   { key: 'root', exact: true, to: '/login', From: '/' },
