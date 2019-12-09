@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import _ from 'lodash';
+import { enquireScreen } from 'enquire-js';
 import { Select, Checkbox, Card, Button } from 'antd';
 import dog1 from './../assets/2600abd0-76e0-42ed-9487-210d373631f5.jpg';
 import dog2 from './../assets/98201866-81ec-4a04-a99a-3cd2b2c67b01.jpg';
@@ -30,7 +31,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         gender: '',
         email: '',
         phone: '',
-        IDNumber: ''
+        IDNumber: '',
+        isMobile: false
       };
     }
 
@@ -40,9 +42,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       await GET_adminLoin(payload, callback, loading);
     }
 
+    componentDidMount = () => {
+      this.enquireHandler = enquireScreen(mobile => {
+        this.setState({
+          isMobile: mobile ? true : false,
+        });
+      }/*, '(max-width: 1024px)' */);
+    }
+
     render() {
-      const { name, DateBirth, gender, email, phone, IDNumber, dateFormat, selectAfter } = this.state;
-      const style = { width: '25%', float: 'left' };
+      const { isMobile, name, DateBirth, gender, email, phone, IDNumber, dateFormat, selectAfter } = this.state;
+      const style = { width: isMobile ? '150px' : '25%', float: 'left', paddingBottom: isMobile ? '10px' : '' };
       return (
         <div style={{ height: '70vh', overflowY: 'auto' }}>
           <div style={{ width: '100%', height: '3vh', marginBottom: '2%' }}>

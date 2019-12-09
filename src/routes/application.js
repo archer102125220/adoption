@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import _ from 'lodash';
+import { enquireScreen } from 'enquire-js';
 import { DatePicker, Select, Input, Button, Radio } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -27,13 +28,26 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         phone: '',
         IDNumber: '',
         dateFormat: 'YYYY/MM/DD',
-        selectAfter: (
-          <Select defaultValue='@gmail.com' style={{ width: 145 }}>
-            <Option value='@gmail.com'>@gmail.com</Option>
-            <Option value='@yahoo.com.tw'>@yahoo.com.tw</Option>
-          </Select>
-        )
+        isMobile: false,
       };
+    }
+
+    selectAfter = (data) => {
+
+      return (
+        <Select defaultValue='@gmail.com' style={{ width: 145 }}>
+          <Option value='@gmail.com'>@gmail.com</Option>
+          <Option value='@yahoo.com.tw'>@yahoo.com.tw</Option>
+        </Select>
+      );
+    }
+
+    componentDidMount = () => {
+      this.enquireHandler = enquireScreen(mobile => {
+        this.setState({
+          isMobile: mobile ? true : false,
+        });
+      }/*, '(max-width: 1024px)' */);
     }
 
     handleGETAdminLoin = async (payload, callback) => {
@@ -43,7 +57,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      const { name, DateBirth, gender, email, phone, IDNumber, dateFormat, selectAfter } = this.state;
+      const { name, DateBirth, gender, email, phone, IDNumber, dateFormat } = this.state;
 
       return (
         <div>
@@ -66,7 +80,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             </Radio.Group>
           </div>
           <div style={{ marginBottom: 16 }}>
-            <Input addonBefore='E-mail' addonAfter={selectAfter} value={email} onChange={(e) => this.setState({ email: e.target.value })} />
+            <Input addonBefore='E-mail' addonAfter={this.selectAfter()} value={email} onChange={(e) => this.setState({ email: e.target.value })} />
           </div>
           <div style={{ marginBottom: 16 }}>
             <Input addonBefore='電話號碼' value={phone} onChange={(e) => this.setState({ phone: e.target.value })} />
