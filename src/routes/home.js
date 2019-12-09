@@ -26,12 +26,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     constructor(props) {
       super(props);
       this.state = {
-        name: '',
-        DateBirth: null,
-        gender: '',
-        email: '',
-        phone: '',
-        IDNumber: '',
         isMobile: false
       };
     }
@@ -51,8 +45,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      const { isMobile, name, DateBirth, gender, email, phone, IDNumber, dateFormat, selectAfter } = this.state;
-      const style = { width: isMobile ? '150px' : '25%', float: 'left', paddingBottom: isMobile ? '10px' : '' };
+      const { isMobile } = this.state;
+      const style = { width: isMobile ? '150px' : '25%', float: 'left', paddingBottom: isMobile ? '10px' : '' },
+        cardStyle = { width: isMobile ? '38vw' : 'auto', padding: 0, height: 'auto', margin: '5px' },
+        cardImgStyla = { width: isMobile ? '100%' : 240 };
       return (
         <div style={{ height: '70vh', overflowY: 'auto' }}>
           <div style={{ width: '100%', height: '3vh', marginBottom: '2%' }}>
@@ -74,46 +70,46 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             </Select></div>
           </div>
           <div style={{ marginBottom: '2%' }}><Checkbox>30天後安樂死</Checkbox></div>
-          <Button style={{ width: 'auto', padding: 0, height: 'auto', margin: '5px' }}>
+          <Button style={cardStyle}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              style={cardImgStyla}
               cover={<img alt='小黑' src={dog1} />}
             >
               <Meta title='可愛小黑' description='跪求認養' />
             </Card>
           </Button>
-          <Button style={{ width: 'auto', padding: 0, height: 'auto', margin: '5px' }}>
+          <Button style={cardStyle}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              style={cardImgStyla}
               cover={<img alt='小黑' src={dog2} />}
             >
               <Meta title='可愛小黑' description='跪求認養' />
             </Card>
           </Button>
-          <Button style={{ width: 'auto', padding: 0, height: 'auto', margin: '5px' }}>
+          <Button style={cardStyle}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              style={cardImgStyla}
               cover={<img alt='小黑' src={dog3} />}
             >
               <Meta title='可愛小黑' description='跪求認養' />
             </Card>
           </Button>
-          <Button style={{ width: 'auto', padding: 0, height: 'auto', margin: '5px' }}>
+          <Button style={cardStyle}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              style={cardImgStyla}
               cover={<img alt='小黑' src={dog4} />}
             >
               <Meta title='可愛小黑' description='跪求認養' />
             </Card>
           </Button>
-          <Button style={{ width: 'auto', padding: 0, height: 'auto', margin: '5px' }}>
+          <Button style={cardStyle}>
             <Card
               hoverable
-              style={{ width: 240 }}
+              style={cardImgStyla}
               cover={<img alt='小黑' src={dog5} />}
             >
               <Meta title='可愛小黑' description='跪求認養' />
