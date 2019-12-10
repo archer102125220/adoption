@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
   return {
     systemName: _.get(state, 'global.systemName'),
     copyright: _.get(state, 'global.copyright'),
+    adminLoin: _.get(state, 'adminLoin.adminLoin', []),
   };
 };
 
@@ -38,7 +39,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     }
 
     render() {
-      const { children, systemName, copyright } = this.props;
+      const { children, systemName, copyright, adminLoin } = this.props;
+      console.log(adminLoin.length > 0);
       const menu = (
         <Menu>
           <Menu.Item key='1'><Link to='/'>登出</Link></Menu.Item>
@@ -64,16 +66,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     </Menu>
                   </div>)
               }
-              <div style={{ display: 'inline' }}>
-                <Dropdown trigger={['click']} overlay={menu}>
-                  <span className='action account' style={isMobile === false ? {} : { padding: 0, paddingLeft: '10px' }}>
-                    <Avatar size='small' className={isMobile === false ? 'avatar' : 'avatarMobile'} icon='user' />
-                  </span>
-                </Dropdown>
-              </div>
+              {
+                adminLoin.length > 0 ?
+                  <div style={{ display: 'inline' }}>
+                    <Dropdown trigger={['click']} overlay={menu}>
+                      <span className='action account' style={isMobile === false ? {} : { padding: 0, paddingLeft: '10px' }}>
+                        <Avatar size='small' className={isMobile === false ? 'avatar' : 'avatarMobile'} icon='user' />
+                      </span>
+                    </Dropdown>
+                  </div> : <div></div>
+              }
               {
                 isMobile === true && (
-                  <div style={{ display: 'inline' }}>
+                  <div style={{ display: 'inline', float: 'right' }}>
                     <Dropdown trigger={['click']} overlay={
                       <Menu>
                         {

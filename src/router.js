@@ -14,7 +14,7 @@ const routeComponent = [
   { key: 'home', path: '/home', exact: true, component: home },
 ];
 const redirectComponent = [ //轉址
-  { key: 'root', exact: true, to: '/login', From: '/' },
+  { key: 'root', exact: true, to: '/home', From: '/' },
 ];
 
 class Root extends Component {
