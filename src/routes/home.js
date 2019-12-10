@@ -44,77 +44,52 @@ export default connect(mapStateToProps, mapDispatchToProps)(
       }/*, '(max-width: 1024px)' */);
     }
 
-    render() {
+    cardRender = (data) => {
       const { isMobile } = this.state;
-      const style = { width: isMobile ? '150px' : '25%', float: 'left', paddingBottom: isMobile ? '10px' : '' },
-        cardStyle = { width: isMobile ? '38vw' : 'auto', padding: 0, height: 'auto', margin: '5px' },
+      const cardStyle = { width: isMobile ? '38vw' : 'auto', padding: 0, height: 'auto', margin: '5px' },
         cardImgStyla = { width: isMobile ? '100%' : 240 };
+      return data.map((val, key) => <Button key={key} style={cardStyle}>
+        <Card
+          hoverable
+          style={cardImgStyla}
+          cover={val.cover}
+        >
+          {val.meta}
+        </Card>
+      </Button>);
+    }
+
+    selectRender = (data) => {
+      const { isMobile } = this.state;
+      const style = { width: isMobile ? '150px' : '25%', float: 'left', paddingBottom: isMobile ? '10px' : '' };
+      return data.map((val, key) => <div key={key} style={style}>
+        {val.lable}<Select defaultValue={val.defaultValue} onChange={val.onChange}>
+          {val.option.map((txt, key) => <Option key={key} value={txt.value}>{txt.txt}</Option>)}
+        </Select>
+      </div>);
+    }
+
+    render() {
+      const selectData = [
+        { lable: '動物：', defaultValue: 'cat', option: [{ value: 'cat', txt: '貓咪' }, { value: 'dog', txt: '狗' }], onChange: (value) => { } },
+        { lable: '品種：', defaultValue: 'cat', option: [{ value: 'cat', txt: '米克斯' }, { value: 'dog', txt: '賓士' }], onChange: (value) => { } },
+        { lable: '性別：', defaultValue: 'male', option: [{ value: 'male', txt: '公' }, { value: 'female', txt: '母' }], onChange: (value) => { } },
+        { lable: '年齡：', defaultValue: 'cat', option: [{ value: 'cat', txt: '2個月以下' }, { value: 'dog', txt: '4個月' }], onChange: (value) => { } },
+      ],
+        cardData = [
+          { cover: <img alt='小黑' src={dog1} />, meta: <Meta title='可愛小黑' description='跪求認養' /> },
+          { cover: <img alt='小黑' src={dog2} />, meta: <Meta title='可愛小黑' description='跪求認養' /> },
+          { cover: <img alt='小黑' src={dog3} />, meta: <Meta title='可愛小黑' description='跪求認養' /> },
+          { cover: <img alt='小黑' src={dog4} />, meta: <Meta title='可愛小黑' description='跪求認養' /> },
+          { cover: <img alt='小黑' src={dog5} />, meta: <Meta title='可愛小黑' description='跪求認養' /> },
+        ];
       return (
         <div style={{ height: '70vh', overflowY: 'auto' }}>
           <div style={{ width: '100%', height: '3vh', marginBottom: '2%' }}>
-            <div style={style}>動物：<Select defaultValue='cat'>
-              <Option value='cat'>貓咪</Option>
-              <Option value='dog'>狗</Option>
-            </Select></div>
-            <div style={style}>品種：<Select defaultValue='cat'>
-              <Option value='cat'>米克斯</Option>
-              <Option value='dog'>貴賓</Option>
-            </Select></div>
-            <div style={style}>性別：<Select defaultValue='cat'>
-              <Option value='cat'>公</Option>
-              <Option value='dog'>母</Option>
-            </Select></div>
-            <div style={style}>年齡：<Select defaultValue='cat'>
-              <Option value='cat'>2個月以下</Option>
-              <Option value='dog'>4個月</Option>
-            </Select></div>
+            {this.selectRender(selectData)}
           </div>
           <div style={{ marginBottom: '2%' }}><Checkbox>30天後安樂死</Checkbox></div>
-          <Button style={cardStyle}>
-            <Card
-              hoverable
-              style={cardImgStyla}
-              cover={<img alt='小黑' src={dog1} />}
-            >
-              <Meta title='可愛小黑' description='跪求認養' />
-            </Card>
-          </Button>
-          <Button style={cardStyle}>
-            <Card
-              hoverable
-              style={cardImgStyla}
-              cover={<img alt='小黑' src={dog2} />}
-            >
-              <Meta title='可愛小黑' description='跪求認養' />
-            </Card>
-          </Button>
-          <Button style={cardStyle}>
-            <Card
-              hoverable
-              style={cardImgStyla}
-              cover={<img alt='小黑' src={dog3} />}
-            >
-              <Meta title='可愛小黑' description='跪求認養' />
-            </Card>
-          </Button>
-          <Button style={cardStyle}>
-            <Card
-              hoverable
-              style={cardImgStyla}
-              cover={<img alt='小黑' src={dog4} />}
-            >
-              <Meta title='可愛小黑' description='跪求認養' />
-            </Card>
-          </Button>
-          <Button style={cardStyle}>
-            <Card
-              hoverable
-              style={cardImgStyla}
-              cover={<img alt='小黑' src={dog5} />}
-            >
-              <Meta title='可愛小黑' description='跪求認養' />
-            </Card>
-          </Button>
+          {this.cardRender(cardData)}
         </div>
       );
     }
