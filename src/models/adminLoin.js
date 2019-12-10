@@ -5,7 +5,7 @@ export default {
   namespace: 'adminLoin',
 
   state: {
-    adminLoin: [],
+    admin: [],
   },
 
   // subscriptions: {
@@ -27,9 +27,10 @@ export default {
     },
     *POST_adminLoin({ payload, callback, loading }, { call, put }) {
       try {
-        const response = yield call(POST_admin, payload);
-        console.log(response.message);
-        yield put({ type: 'SAVE_admin', payload: response });
+        // const response = yield call(POST_admin, payload);
+        // console.log(response.message);
+        // yield put({ type: 'SAVE_admin', payload: response });
+        yield put({ type: 'SAVE_admin', payload: ['a'] });
         if (loading) { loading(false); }
         if (callback) { callback(); }
       } catch (error) {

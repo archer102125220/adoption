@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
   return {
     systemName: _.get(state, 'global.systemName'),
     copyright: _.get(state, 'global.copyright'),
-    adminLoin: _.get(state, 'adminLoin.adminLoin', []),
+    adminLoin: _.get(state, 'adminLoin.admin', []),
   };
 };
 

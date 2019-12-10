@@ -14,7 +14,7 @@ const { Meta } = Card;
 const { Option } = Select;
 
 const mapStateToProps = (state) => ({
-  adminLoin: _.get(state, 'adminLoin.adminLoin', []),
+  adminLoin: _.get(state, 'adminLoin.admin', []),
 });
 
 const mapDispatchToProps = (dispatch) => ({

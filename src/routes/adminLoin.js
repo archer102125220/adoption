@@ -89,9 +89,9 @@ const LoginForm = Form.create()(
             window.localStorage["password"] = '';
             window.localStorage["remember"] = false;
           }
-          // this.props.handlePOSTAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
+          this.props.handlePOSTAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
           // this.props.handleGETAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
-          this.props.history.push('/home');
+          // this.props.history.push('/home');
         }
       });
     };
