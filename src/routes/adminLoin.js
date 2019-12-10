@@ -6,6 +6,12 @@ import './adminLoin.less';
 
 const FormItem = Form.Item;
 
+if (window.localStorage["remember"] !== true && window.localStorage["remember"] !== 'true') {
+  window.localStorage["Account"] = '';
+  window.localStorage["password"] = '';
+  window.localStorage["remember"] = false;
+}
+
 const mapStateToProps = (state) => ({
   adminLoin: _.get(state, 'adminLoin.adminLoin', []),
 });
@@ -58,11 +64,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
 const LoginForm = Form.create()(
   class NormalLoginForm extends React.Component {
+    componentDidMount = () => {
+
+      if (window.localStorage["remember"] === true || window.localStorage["remember"] === 'true') {
+        this.props.form.setFieldsValue({
+          Account: window.localStorage["Account"],
+          password: window.localStorage["password"],
+          remember: window.localStorage["remember"] === 'true' ? true : false,
+        });
+      }
+    }
+
     handleSubmit = e => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          const { Account, password } = values;
+          const { Account, password, remember } = values;
+          if (remember === true) {
+            window.localStorage["Account"] = Account;
+            window.localStorage["password"] = password;
+            window.localStorage["remember"] = true;
+          } else {
+            window.localStorage["Account"] = '';
+            window.localStorage["password"] = '';
+            window.localStorage["remember"] = false;
+          }
           // this.props.handlePOSTAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
           // this.props.handleGETAdminLoin({ name: Account, password }, () => this.props.history.push('/home'));
           this.props.history.push('/home');
