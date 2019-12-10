@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    login_out: (payload, callback, loading) => dispatch({ type: 'adminLoin/login_out', payload, callback, loading }),
   };
 };
 
@@ -40,10 +41,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
     render() {
       const { children, systemName, copyright, adminLoin } = this.props;
-      console.log(adminLoin.length > 0);
+      console.log(adminLoin);
       const menu = (
         <Menu>
-          <Menu.Item key='1'><Link to='/'>登出</Link></Menu.Item>
+          <Menu.Item key='1'><Link to='/login' >登出</Link></Menu.Item>
         </Menu>
       );
       const { isMobile } = this.state;

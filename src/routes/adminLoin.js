@@ -19,6 +19,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   POST_adminLoin: (payload, callback, loading) => dispatch({ type: 'adminLoin/POST_adminLoin', payload, callback, loading }),
   GET_adminLoin: (payload, callback, loading) => dispatch({ type: 'adminLoin/GET_adminLoin', payload, callback, loading }),
+  login_out: (payload, callback, loading) => dispatch({ type: 'adminLoin/login_out', payload, callback, loading }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
@@ -73,6 +74,7 @@ const LoginForm = Form.create()(
           remember: window.localStorage["remember"] === 'true' ? true : false,
         });
       }
+      this.props.login_out();
     }
 
     handleSubmit = e => {
